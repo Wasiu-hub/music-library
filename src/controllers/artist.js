@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-
 const db = require("../db/index.js");
+
 const createArtist = async (req, res) => {
   const { name, genre } = req.body;
 
@@ -17,4 +17,14 @@ const createArtist = async (req, res) => {
   }
 };
 
-module.exports = { createArtist };
+// get all artists from database
+const getAllArtists = async (_, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM Artists");
+    res.status(200).json(rows);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+module.exports = { createArtist, getAllArtists };
