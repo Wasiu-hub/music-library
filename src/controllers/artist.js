@@ -27,4 +27,24 @@ const getAllArtists = async (_, res) => {
   }
 };
 
-module.exports = { createArtist, getAllArtists };
+// gets artist by id
+//instead of placing the [id] in the script, we use $1 (auto escaping)
+
+const getArtistById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      rows: [artist],
+    } = await db.query("SELECT * FROM Artists WHERE id = $1", [id]);
+
+    if (!artist) {
+      res.status(404).json({ message: `artist ${id} does not exist` });
+    }
+
+    res.status(200).json(artist);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+module.exports = { createArtist, getAllArtists, getArtistById };
