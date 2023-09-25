@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+
+const db = require("../db/index.js");
 const createArtist = async (req, res) => {
   const { name, genre } = req.body;
 
