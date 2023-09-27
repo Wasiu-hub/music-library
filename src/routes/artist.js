@@ -8,5 +8,6 @@ artistRouter.get("/", artistController.getAllArtists);
 artistRouter.get("/:id", artistController.getArtistById);
 artistRouter.put("/:id", artistController.putArtist);
 artistRouter.patch("/:id", artistController.updateArtist);
+artistRouter.delete("/:id", artistController.deleteArtist);
 
 module.exports = artistRouter;
